@@ -4,7 +4,9 @@ This flake produces a bootable image for [NanoPi R5S](https://wiki.friendlyelec.
 
 The image can be flashed onto an SD card or the built in EMMC storage as is. It could (in theory - currently untested) also run from an NVMe drive, but you'll need to manually install a bootloader on EMMC.
 
-It uses uboot builds from https://github.com/inindev/nanopi-r5 - other than that everything else is stock NixOS with stock kernel.
+Log in with username and password `nix`, the user is set up with paswordless sudo and ssh is enabled by default.
+
+It uses uboot builds from https://github.com/inindev/u-boot-build - other than that everything else is stock NixOS with stock kernel.
 
 On first boot the system will resize the filesystem to fit the whole drive and initialize the nix store.
 
