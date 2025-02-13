@@ -6,25 +6,26 @@
 pkgs.stdenvNoCC.mkDerivation {
   name = "nanopi-r5s-loader";
 
-  idbLoader = pkgs.fetchurl {
-    url = "https://github.com/inindev/nanopi-r5/releases/download/v12.0.3/idbloader-r5s.img";
-    hash = "sha256-TzVl3V8lv5h6NvNioRHD7m5ob/S6L6LYhejmEZnYUSY=";
+  src = pkgs.fetchurl {
+    url = "https://github.com/inindev/u-boot-build/releases/download/2025.01/rk3568-nanopi-r5s.zip";
+    hash = "sha256-ZJYM1sjaS0wCQPqKuP8HxmqXpy+eaSyjvMnWakTvZ80=";
   };
 
-  uBoot = pkgs.fetchurl {
-    url = "https://github.com/inindev/nanopi-r5/releases/download/v12.0.3/u-boot-r5s.itb";
-    hash = "sha256-6ZP0yl4f7vTFHxV+iF9HTDD4l1SOiT8kvUZuvCuc1Lo=";
-  };
+  nativeBuildInputs = [ pkgs.unzip ];
 
-  dontUnpack = true;
   dontPatch = true;
   dontConfigure = true;
   dontBuild = true;
   dontFixup = true;
 
+  unpackPhase = ''
+    unzip $src -d src
+  '';
+
   installPhase = ''
     mkdir -p $out
-    cp $idbLoader $out/idbloader.img
-    cp $uBoot $out/u-boot.itb
+    
+    cp src/idbloader.img $out/idbloader.img
+    cp src/u-boot.itb $out/u-boot.itb
   '';
 }
