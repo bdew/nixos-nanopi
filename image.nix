@@ -1,36 +1,46 @@
 {
   pkgs,
-  image,
-  bootLoader,
-  imageName,
-  modulesPath,
-  configFile,
+  nixpkgs,
+  modelDef,
 }:
+let
+  bootLoader = import ./loader.nix {
+    inherit pkgs;
+    inherit (modelDef) model bootLoaderDownload;
+  };
+  image = nixpkgs.lib.nixosSystem {
+    system = "aarch64-linux";
+    modules = [
+      ./modules/common.nix
+      ./modules/boot.nix
+      modelDef.module
+    ];
+  };
+in
 pkgs.stdenv.mkDerivation {
-  name = imageName;
+  name = "nanopi-${modelDef.model}-nixos";
 
   nativeBuildInputs = with pkgs; [
     e2fsprogs
     util-linux
-    zstd
+    xz
   ];
 
   inherit bootLoader;
 
-  rootfsImage = pkgs.callPackage "${toString modulesPath}/../lib/make-ext4-fs.nix" ({
+  rootfsImage = pkgs.callPackage "${toString nixpkgs}/nixos/lib/make-ext4-fs.nix" ({
     storePaths = image.config.system.build.toplevel;
     populateImageCommands = ''
       mkdir -p ./files/boot
       mkdir -p ./files/etc/nixos
       ${image.config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${image.config.system.build.toplevel} -d ./files/boot
-      cp ${configFile} ./files/etc/nixos/configuration.nix
     '';
     volumeLabel = "NIXOS";
   });
 
   buildCommand = ''
     mkdir $out
-    
+
     img=tmp.img
 
     # Gap in front of the root partition, in MiB
@@ -53,7 +63,7 @@ pkgs.stdenv.mkDerivation {
     dd bs=4K seek=8 if=$bootLoader/idbloader.img of=$img conv=notrunc
     dd bs=4K seek=2048 if=$bootLoader/u-boot.itb of=$img conv=notrunc
 
-    zstd $img -o $out/${imageName}.img.zst
+    xz -vc $img > $out/nanopi-${modelDef.model}-nixos.img.xz
   '';
 
 }

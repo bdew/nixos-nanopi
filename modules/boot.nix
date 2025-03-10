@@ -3,9 +3,7 @@
   pkgs,
   ...
 }:
-
 {
-  # This is in a separate file so it won't be copied to the target configuration.nix
   config = {
     boot.postBootCommands =
       let

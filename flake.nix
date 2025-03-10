@@ -1,5 +1,5 @@
 {
-  description = "A Nixos SD/EMMC image for Nanopi R5S";
+  description = "A Nixos SD/EMMC image for Nanopi R5S/R5C";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -16,28 +16,26 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        models = import ./models.nix;
       in
       {
-        packages =
-          let
-            image = nixpkgs.lib.nixosSystem {
-              system = "aarch64-linux";
-              modules = [
-                ./nanopi.nix
-                ./boot.nix
-              ];
-            };
-            bootLoader = import ./loader.nix { inherit pkgs; };
-          in
-          {
-            nanopi-r5s-image = import ./image.nix {
-              inherit image bootLoader pkgs;
-              imageName = "nanopi-r5s-nixos";
-              modulesPath = nixpkgs + "/nixos/modules";
-              configFile = ./nanopi.nix;
-            };
-            default = self.packages."${system}".nanopi-r5s-image;
+        packages = rec {
+          nanopi-r5s-image = import ./image.nix {
+            inherit nixpkgs pkgs;
+            modelDef = models.r5s;
           };
+          nanopi-r5c-image = import ./image.nix {
+            inherit nixpkgs pkgs;
+            modelDef = models.r5c;
+          };
+          default = pkgs.symlinkJoin {
+            name = "nanopi-images";
+            paths = [
+              nanopi-r5s-image
+              nanopi-r5c-image
+            ];
+          };
+        };
       }
     );
 }
