@@ -2,7 +2,7 @@
   description = "A Nixos SD/EMMC image for Nanopi R5S/R5C";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 

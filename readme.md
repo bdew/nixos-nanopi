@@ -2,7 +2,7 @@
 
 This flake produces a bootable image for NanoPi [R5S](https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R5S) and [R5C](https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R5C) SBC.
 
-The image can be flashed onto an SD card or the built in EMMC storage as is. It could (in theory - currently untested) also run from an NVMe drive, but you'll need to manually install a bootloader on EMMC.
+The image can be flashed onto an SD card or the built in EMMC storage as is. It can also run from an NVMe drive, but you'll need to manually install a bootloader on EMMC.
 
 Log in with username and password `nix`, the user is set up with paswordless sudo and ssh is enabled by default.
 

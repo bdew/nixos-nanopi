@@ -118,6 +118,6 @@
       '';
     };
 
-    system.stateVersion = lib.mkDefault "24.11";
+    system.stateVersion = lib.mkDefault "25.05";
   };
 }
