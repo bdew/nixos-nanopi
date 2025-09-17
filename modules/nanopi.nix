@@ -4,6 +4,7 @@
     ./common.nix
     ./r5s.nix
     ./r5c.nix
+    ./netdriver.nix
   ];
 
   options = {
