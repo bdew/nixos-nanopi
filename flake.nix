@@ -20,11 +20,11 @@
       in
       {
         packages = rec {
-          nanopi-r5s-image = import ./image.nix {
+          nanopi-r5s-image = import ./utils/image.nix {
             inherit nixpkgs pkgs;
             modelDef = models.r5s;
           };
-          nanopi-r5c-image = import ./image.nix {
+          nanopi-r5c-image = import ./utils/image.nix {
             inherit nixpkgs pkgs;
             modelDef = models.r5c;
           };

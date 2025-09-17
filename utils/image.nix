@@ -11,8 +11,8 @@ let
   image = nixpkgs.lib.nixosSystem {
     system = "aarch64-linux";
     modules = [
-      ./modules/common.nix
-      ./modules/boot.nix
+      ../modules/common.nix
+      ../modules/boot.nix
       modelDef.module
     ];
   };
