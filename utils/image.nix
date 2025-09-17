@@ -11,9 +11,8 @@ let
   image = nixpkgs.lib.nixosSystem {
     system = "aarch64-linux";
     modules = [
-      ../modules/common.nix
-      ../modules/boot.nix
-      modelDef.module
+      ../modules/image.nix
+      { nanopi.model = modelDef.model; }
     ];
   };
 in

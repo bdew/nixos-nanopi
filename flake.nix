@@ -1,5 +1,5 @@
 {
-  description = "A Nixos SD/EMMC image for Nanopi R5S/R5C";
+  description = "A Nixos SD/EMMC image and supporting modules for Nanopi R5S/R5C";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -12,7 +12,7 @@
       nixpkgs,
       flake-utils,
     }:
-    flake-utils.lib.eachDefaultSystem (
+    (flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -37,5 +37,8 @@
           };
         };
       }
-    );
+    ))
+    // {
+      nixosModules.default = import ./modules/nanopi.nix;
+    };
 }
