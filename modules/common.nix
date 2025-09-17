@@ -33,7 +33,6 @@
       timeout = 1;
     };
 
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13;
     boot.kernelParams = [
       "console=tty0"
       "earlycon=uart8250,mmio32,0xfe660000"
