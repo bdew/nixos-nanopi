@@ -12,7 +12,7 @@ let
     system = "aarch64-linux";
     modules = [
       ../modules/image.nix
-      { nanopi.model = modelDef.model; }
+      (import ../modules/model-specific.nix modelDef)
     ];
   };
 in

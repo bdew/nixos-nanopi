@@ -1,9 +1,9 @@
 { config, lib, ... }:
 {
   options = {
-    nanopi.drivers.r8125 = lib.mkEnableOption "custom r8125 network driver";
+    nanopi.network.r8125 = lib.mkEnableOption "custom r8125 network driver";
   };
-  config = lib.mkIf config.nanopi.drivers.r8125 (
+  config = lib.mkIf config.nanopi.network.r8125 (
     let
       # inspired from https://git.openwrt.org/?p=openwrt/openwrt.git;a=blob;f=package/kernel/r8125/Makefile;h=7cb28c9980482511fa143d6243fea63fd3f23f41;hb=HEAD
       customR8125 = config.boot.kernelPackages.r8125.overrideAttrs (old: {

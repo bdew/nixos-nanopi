@@ -48,6 +48,6 @@
       "dw_mipi_dsi"
     ];
 
-    powerManagement.cpuFreqGovernor = "schedutil";
+    powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
   };
 }

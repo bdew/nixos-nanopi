@@ -12,33 +12,31 @@
       nixpkgs,
       flake-utils,
     }:
+    let
+      models = import ./models;
+      mkModule = import ./modules/model-specific.nix;
+    in
     (flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        models = import ./models.nix;
+        images = pkgs.lib.mapAttrs' (modelName: modelDef: {
+          name = "nanopi-${modelName}-image";
+          value = import ./utils/image.nix {
+            inherit nixpkgs pkgs modelDef;
+          };
+        }) models;
       in
       {
-        packages = rec {
-          nanopi-r5s-image = import ./utils/image.nix {
-            inherit nixpkgs pkgs;
-            modelDef = models.r5s;
-          };
-          nanopi-r5c-image = import ./utils/image.nix {
-            inherit nixpkgs pkgs;
-            modelDef = models.r5c;
-          };
+        packages = images // {
           default = pkgs.symlinkJoin {
             name = "nanopi-images";
-            paths = [
-              nanopi-r5s-image
-              nanopi-r5c-image
-            ];
+            paths = pkgs.lib.attrValues images;
           };
         };
       }
     ))
     // {
-      nixosModules.default = import ./modules/nanopi.nix;
+      nixosModules = builtins.mapAttrs (modelName: modelDef: mkModule modelDef) models;
     };
 }

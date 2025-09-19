@@ -8,7 +8,6 @@
 }:
 {
   imports = [
-    ./nanopi.nix
     ./boot.nix
   ];
   config = {
