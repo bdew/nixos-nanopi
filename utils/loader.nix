@@ -24,7 +24,7 @@ pkgs.stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out
 
-    cp src/idbloader.img $out/idbloader.img
-    cp src/u-boot.itb $out/u-boot.itb
+    cp src/base-files/idbloader.img $out/idbloader.img
+    cp src/base-files/u-boot.itb $out/u-boot.itb
   '';
 }
