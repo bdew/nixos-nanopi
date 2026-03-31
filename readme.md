@@ -4,7 +4,7 @@ This flake provides modules and bootable images for NanoPi [R5S](https://wiki.fr
 
 # Using the modules
 
-Add the flake as an input in your config 
+Add the flake as an input in your config
 
 ```nix
     nanopi = {
@@ -17,11 +17,11 @@ Then add `nanopi.nixosModules.r5s` (or `r5c`) to your modules.
 
 ## Available options:
 
-#### `nanopi.network.intefaces.<name>.name = "...";`
-  
+#### `nanopi.network.interfaces.<name>.name = "...";`
+
 Changes network interface names (default is wan0/lan1/lan2)
 
-#### `nanopi.network.intefaces.<name>.mac = "12:34:56:78:90:AB";`
+#### `nanopi.network.interfaces.<name>.mac = "12:34:56:78:90:AB";`
 
 Sets the mac address for the interface - if unset a random address is generated on every boot
 
