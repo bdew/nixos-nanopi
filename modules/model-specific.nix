@@ -7,7 +7,7 @@ modelData:
   ];
 
   options = {
-    nanopi.network.intefaces = builtins.listToAttrs (
+    nanopi.network.interfaces = builtins.listToAttrs (
       builtins.map (
         nic:
         lib.nameValuePair nic.name {
@@ -32,7 +32,7 @@ modelData:
       builtins.map (
         nic:
         let
-          opts = config.nanopi.network.intefaces.${nic.name};
+          opts = config.nanopi.network.interfaces.${nic.name};
         in
         lib.nameValuePair "10-${nic.name}" {
           matchConfig = {

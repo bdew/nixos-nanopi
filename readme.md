@@ -4,7 +4,7 @@ This flake provides modules and bootable images for NanoPi [R5S](https://wiki.fr
 
 # Using the modules
 
-Add the flake as an input in your config 
+Add the flake as an input in your config
 
 ```nix
     nanopi = {
@@ -17,11 +17,11 @@ Then add `nanopi.nixosModules.r5s` (or `r5c`) to your modules.
 
 ## Available options:
 
-#### `nanopi.network.intefaces.<name>.name = "...";`
-  
+#### `nanopi.network.interfaces.<name>.name = "...";`
+
 Changes network interface names (default is wan0/lan1/lan2)
 
-#### `nanopi.network.intefaces.<name>.mac = "12:34:56:78:90:AB";`
+#### `nanopi.network.interfaces.<name>.mac = "12:34:56:78:90:AB";`
 
 Sets the mac address for the interface - if unset a random address is generated on every boot
 
@@ -35,7 +35,7 @@ The image can be flashed onto an SD card or the built in EMMC storage as is. It 
 
 Log in with username and password `nix`, the user is set up with paswordless sudo and ssh is enabled by default.
 
-It uses uboot builds from https://github.com/inindev/u-boot-build - other than that everything else is stock NixOS with stock kernel.
+It uses uboot builds from https://github.com/inindev/uboot-rockchip - other than that everything else is stock NixOS with stock kernel.
 
 On first boot the system will resize the filesystem to fit the whole drive and initialize the nix store.
 
