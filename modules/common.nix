@@ -11,7 +11,7 @@
     hardware.firmware = [
       pkgs.linux-firmware
     ];
-   
+
     boot.loader = {
       grub.enable = false;
       generic-extlinux-compatible = {
@@ -21,6 +21,7 @@
       timeout = 1;
     };
 
+    boot.kernelPackages = pkgs.linuxPackages_6_18;
     boot.kernelParams = [
       "console=tty0"
       "earlycon=uart8250,mmio32,0xfe660000"
