@@ -46,6 +46,9 @@
       nvd
       ethtool
       sysstat
+      pciutils
+      usbutils
+      lm_sensors
     ];
 
     security.sudo.wheelNeedsPassword = false;
@@ -77,6 +80,6 @@
       '';
     };
 
-    system.stateVersion = lib.mkDefault "25.05";
+    system.stateVersion = lib.mkDefault "25.11";
   };
 }
