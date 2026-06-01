@@ -1,8 +1,8 @@
 {
   model = "r5c";
   bootLoaderDownload = {
-    url = "https://github.com/inindev/uboot-rockchip/releases/download/v2026.01/rk3568-nanopi-r5c.zip";
-    hash = "sha256-ExKHl3pakf0eAjeOJC2CcTj0h+Ay60RJQMLnoVB8EH4=";
+    url = "https://github.com/inindev/uboot-rockchip/releases/download/v2026.04/rk3568-nanopi-r5c.zip";
+    hash = "sha256-Tt7bdxLrOSCBzUg8JxZvxepp1oeZo4SC2l3qRI1mpyQ=";
   };
   dtb = "rockchip/rk3568-nanopi-r5c.dtb";
   nics = [
