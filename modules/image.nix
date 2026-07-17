@@ -24,6 +24,8 @@
     boot.tmp.useTmpfs = true;
     boot.growPartition = true;
 
+    boot.loader.generic-extlinux-compatible.configurationLimit = 0;
+
     networking.hostName = "nixos";
     networking.useDHCP = true;
 

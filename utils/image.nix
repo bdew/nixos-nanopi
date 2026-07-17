@@ -15,6 +15,12 @@ let
       (import ../modules/model-specific.nix modelDef)
     ];
   };
+  populateCmd =
+    (import (pkgs.path + "/nixos/modules/system/boot/loader/generic-extlinux-compatible") {
+      inherit pkgs;
+      config = image.config;
+      lib = pkgs.lib;
+    }).config.content.boot.loader.generic-extlinux-compatible.populateCmd;
 in
 pkgs.stdenv.mkDerivation {
   name = "nanopi-${modelDef.model}-nixos";
@@ -32,7 +38,7 @@ pkgs.stdenv.mkDerivation {
     populateImageCommands = ''
       mkdir -p ./files/boot
       mkdir -p ./files/etc/nixos
-      ${image.config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${image.config.system.build.toplevel} -d ./files/boot
+      ${populateCmd} -c ${image.config.system.build.toplevel} -d ./files/boot
     '';
     volumeLabel = "NIXOS";
   });
